@@ -81,5 +81,9 @@
     "tsdown": "^0.23.5",
     "typescript": "7.1.0-beta",
     "vitest": "^5.1.0"
+  },
+  "repository": {
+  	"type": "git",
+  	"url": "https://github.com/ryangarber/better-ink-ui.git"
   }
 }
