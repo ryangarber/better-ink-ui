@@ -11,7 +11,7 @@ type Env = Record<string, string | undefined>;
 export const DEFAULT_CELL: Size = { width: 10, height: 20 };
 
 /** The environment variable that forces a protocol: `kitty` or `none`. */
-export const PROTOCOL_ENV = "BETTER_INK_PICTURE_PROTOCOL";
+export const PROTOCOL_ENV = "BETTER_PICTURE_PROTOCOL";
 
 const QUERY_ID = 0x1b17;
 const FILE_QUERY_ID = 0x1b18;
@@ -202,7 +202,7 @@ export const detectTerminal = async ({
   }
 
   // a 1×1 RGB file for the terminal to read, if it shares our file system
-  const directory = join(tmpdir(), "better-ink-picture");
+  const directory = join(tmpdir(), "better-picture");
   const probe = join(directory, `probe-${process.pid}.rgb`);
   let wroteProbe = false;
   try {

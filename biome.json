@@ -21,7 +21,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "suspicious": {
+        "noConfusingVoidType": "off"
+      }
     }
   },
   "javascript": {
@@ -33,7 +36,7 @@
   },
   "overrides": [
     {
-      "includes": ["src/**/*.test.ts"],
+      "includes": ["src/**/*.test.ts", "src/**/*.test.tsx"],
       "linter": {
         "rules": {
           "suspicious": {

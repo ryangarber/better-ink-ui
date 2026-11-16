@@ -1,14 +1,20 @@
 {
-  "name": "better-ink-picture",
+  "name": "better-ink-ui",
   "version": "0.1.0",
-  "description": "Fast, off-thread terminal images for Ink: Kitty graphics via Unicode placeholders, with a file-link fallback.",
+  "description": "Generic, fast UI primitives for Ink: themed Box and Text, mouse input, virtualized scroll views, text selection, a multiline text area, focus management, and off-thread terminal images.",
   "keywords": [
     "ink",
-    "image",
+    "react",
     "terminal",
-    "kitty",
-    "ghostty",
-    "react"
+    "tui",
+    "cli",
+    "mouse",
+    "scroll",
+    "textarea",
+    "selection",
+    "focus",
+    "image",
+    "kitty"
   ],
   "author": "Ryan Garber",
   "license": "MIT",
@@ -19,6 +25,10 @@
     ".": {
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.mts",
+      "default": "./dist/testing.mjs"
     },
     "./worker": {
       "types": "./dist/worker.d.mts",
@@ -41,7 +51,7 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.18.0",
+  "packageManager": "pnpm@12.21.0+sha512.66fd8278ee28935ce951792d34367ff3af5c432a2756445823029533835b8da529bbe0be5130afd56ed0713fb8789e47bad82d93bd5ae2fe54b15562d6276ef0",
   "peerDependencies": {
     "ink": ">=8",
     "react": ">=19",
@@ -54,7 +64,9 @@
   },
   "dependencies": {
     "jpeg-js": "^0.4.4",
-    "omggif": "^1.0.10"
+    "omggif": "^1.0.10",
+    "string-width": "^9.0.0",
+    "wrap-ansi": "^10.0.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.5",

@@ -13,7 +13,7 @@ import { detectTerminal, Image, ImageProvider } from "../dist/index.mjs";
 const log = process.argv[2];
 const note = (line) => log && appendFileSync(log, `${line}\n`);
 
-const directory = join(tmpdir(), "better-ink-picture-demo");
+const directory = join(tmpdir(), "better-picture-demo");
 mkdirSync(directory, { recursive: true });
 
 /** A gradient with a label, so scaling and orientation are visible. */

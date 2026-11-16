@@ -38,7 +38,7 @@ export type ImageClientOptions = {
   /**
    * Starts the image worker. The default loads `worker.mjs` beside this
    * module; a bundled app (`bun build --compile`, say) builds
-   * `better-ink-picture/worker` as its own entrypoint and starts that here.
+   * `better-ink-ui/worker` as its own entrypoint and starts that here.
    */
   worker?: () => WorkerLike;
   /** Where images without a file of their own are written. */
@@ -118,7 +118,7 @@ export class ImageClient {
     capabilities = capabilitiesFromEnvironment(),
     stdout = process.stdout,
     worker = defaultWorker,
-    tmpdir: directory = join(tmpdir(), "better-ink-picture"),
+    tmpdir: directory = join(tmpdir(), "better-picture"),
     releaseDelay = 2000
   }: ImageClientOptions = {}) {
     this.capabilities = capabilities;

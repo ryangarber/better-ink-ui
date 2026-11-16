@@ -73,9 +73,9 @@ describe("resolveCapabilities", () => {
   });
 
   it("can be forced", () => {
-    expect(
-      resolveCapabilities({ done: true }, { BETTER_INK_PICTURE_PROTOCOL: "kitty" })
-    ).toMatchObject({ protocol: "kitty", detectedBy: "override" });
+    expect(resolveCapabilities({ done: true }, { BETTER_PICTURE_PROTOCOL: "kitty" })).toMatchObject(
+      { protocol: "kitty", detectedBy: "override" }
+    );
   });
 });
 

@@ -18,7 +18,7 @@ const kitty = (fileTransfer: boolean): TerminalCapabilities => ({
 
 /** A client whose "terminal" is a file, read back to see what the worker wrote. */
 const setup = (capabilities: TerminalCapabilities) => {
-  const directory = mkdtempSync(join(tmpdir(), "better-ink-picture-test-"));
+  const directory = mkdtempSync(join(tmpdir(), "better-picture-test-"));
   const terminal = join(directory, "terminal");
   const fd = openSync(terminal, "w");
   const stdout = { fd, columns: 100, rows: 40, write: () => true } as unknown as Output;
