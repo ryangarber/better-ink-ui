@@ -1,3 +1,9 @@
+## v0.1.2 (2026-11-23)
+
+### Features
+
+- hold alt to lock scroll to inner view ([65b55b1](https://github.com/ryangarber/better-ink-ui/commit/65b55b192bd827a55c5130b9575e675bf4faa3a3))
+
 ## v0.1.1 (2026-11-16)
 
 ### Features

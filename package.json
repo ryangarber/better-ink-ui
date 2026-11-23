@@ -1,6 +1,6 @@
 {
   "name": "better-ink-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Generic, fast UI primitives for Ink: themed Box and Text, mouse input, virtualized scroll views, text selection, a multiline text area, focus management, and off-thread terminal images.",
   "keywords": [
     "ink",
