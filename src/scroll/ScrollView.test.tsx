@@ -7,8 +7,8 @@ import { render } from "../testing/index.tsx";
 import { ScrollView } from "./ScrollView.tsx";
 
 /** SGR wheel report at a 1-based column and row: 64 turns it up, 65 down. */
-const wheel = (direction: "up" | "down", row: number) =>
-  `\x1b[<${direction === "up" ? 64 : 65};5;${row}M`;
+const wheel = (direction: "up" | "down", row: number, { alt = false } = {}) =>
+  `\x1b[<${(direction === "up" ? 64 : 65) + (alt ? 8 : 0)};5;${row}M`;
 
 /** PageUp and PageDown, as a terminal sends them — and Fn+↑↓ on a Mac. */
 const PAGE_UP = "\x1b[5~";
@@ -82,6 +82,42 @@ describe("nested scroll views", () => {
     await screen.idle();
     expect(plain(screen)).toContain("outer29");
     expect(plain(screen)).toContain("inner19");
+    screen.cleanup();
+  });
+
+  it("keeps the wheel in a nested view at its edge while Alt is held", async () => {
+    const screen = render(tree);
+    await screen.idle();
+
+    for (let turn = 0; turn < 10; turn++) screen.stdin.write(wheel("up", 22, { alt: true }));
+    await screen.idle();
+    expect(plain(screen)).toContain("inner0");
+    expect(plain(screen)).toContain("outer29");
+
+    // Let go of Alt and the transcript takes over again.
+    for (let turn = 0; turn < 10; turn++) screen.stdin.write(wheel("up", 22));
+    await screen.idle();
+    expect(plain(screen)).toContain("outer0");
+    screen.cleanup();
+  });
+
+  it("passes the wheel on while Alt is held over a view with nothing to scroll", async () => {
+    const screen = render(
+      <Box height={24} flexDirection="column">
+        <ScrollView flexGrow={1} stickToBottom>
+          {lines("outer", 30)}
+          <ScrollView key="short" flexShrink={0}>
+            {lines("short", 2)}
+          </ScrollView>
+        </ScrollView>
+      </Box>
+    );
+    await screen.idle();
+    expect(plain(screen)).toContain("outer29");
+
+    screen.stdin.write(wheel("up", 23, { alt: true }));
+    await screen.idle();
+    expect(plain(screen)).not.toContain("short1");
     screen.cleanup();
   });
 

@@ -472,6 +472,8 @@ export function ScrollView({
   // nested view takes the wheel until it reaches the edge it is being turned
   // towards, and only then does the view around it move. Only the outermost
   // view listens, so rows of a nested view scrolled out of sight never move it.
+  // Holding Alt keeps the wheel in a view that has reached its edge, so the
+  // view around it stays where it is.
   const handleWheel = (event: MouseEvent): WheelResult => {
     const node = viewportRef.current;
     // A scrollbar is part of the view it is drawn in, and of any around it.
@@ -495,7 +497,10 @@ export function ScrollView({
         wheelBuffer.pending() !== 0 ||
         offsetRef.current !== laidOut.offset ||
         pinnedRef.current !== laidOut.pinned;
-      return unsettled && nested.size > 0 ? "unsettled" : "passed";
+      if (unsettled && nested.size > 0) return "unsettled";
+      // Only a view with rows to scroll through holds on to it: one its content
+      // fits in is not something the reader is scrolling.
+      return event.alt && getMaxOffset() > 0 ? "moved" : "passed";
     }
     wheelBuffer.push(event.deltaY * wheelStep, scrollBy);
     return "moved";

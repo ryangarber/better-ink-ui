@@ -3,7 +3,8 @@ import type { MouseEvent } from "../input/mouse.ts";
 import { useMouse } from "../input/useMouse.ts";
 
 /**
- * What a wheel handler did with a turn: `moved` something, `passed` it on to whatever is around
+ * What a wheel handler did with a turn: `moved` something (or kept it from what is around it),
+ * `passed` it on to whatever is around
  * it, or found itself `unsettled` — scrolled further than its last layout, so the views nested in
  * it are still laid out where they were, and the one that will be under the pointer cannot be told
  * yet. An unsettled turn is held and offered again once the view has been drawn.
