@@ -71,7 +71,7 @@ does.
 ```
 
 The library draws its own parts in the `text`, `border`, `scrollbar`, `scrollbarActive`, `selection`,
-`selectionBackground` and `placeholder` theme colors.
+`selectionBackground`, `placeholder`, `popover` and `popoverBorder` theme colors.
 
 ## ScrollView
 
@@ -148,6 +148,34 @@ other editors.
   `restoreFocus` puts the focus back when it closes.
 - Inside a target, `useFocusContext().isFocused` tells what it draws whether it has the keys. `useFocusTarget` is the
   hook form, and `useFocusManager` gives `focused`, `focus(id)`, `cycle` and the rest.
+
+## Popover
+
+```tsx
+<PopoverProvider>
+  <App />
+</PopoverProvider>;
+
+<Popover content={<Text>Saved 2 minutes ago</Text>} position="top" align="end">
+  {({ isOpen }) => <Text color={isOpen ? "accent" : undefined}>●</Text>}
+</Popover>;
+```
+
+- Opens while the pointer is over the trigger or the popover, is held open by a click on the trigger (and let go
+  by the next), and closes on a press anywhere else. `openOnHover`, `toggleOnClick` and `closeOnClickOutside` turn
+  each off; `open` + `onOpenChange` control it; `disabled` turns it off entirely.
+- `position` is the side preferred. It flips to the opposite one where that has more room, and is pushed back inside
+  `bounds` (screen bounds or an element's ref, by default the provider's area). `align` lines it up along that side,
+  `offset` leaves cells between, and `anchor` places it beside another element than the trigger.
+- It follows its trigger as the layout moves it, from any render, and hides while the trigger is out of view.
+- Inside a `<Text>`, the trigger is inline text. Children may be `({ isOpen, isHovered, isPinned }) => …`, and
+  `content` may be `({ close }) => …`, called only while open.
+- Opening one closes any other, but those it was opened from. A popover is a mouse layer.
+- `contentProps` style its box, drawn in the theme's `popover` background and `popoverBorder` color, with a border
+  and a column of padding either side.
+
+Ink has no portals, so content is drawn by the nearest `PopoverProvider`, over the box it is rendered in, and takes
+its context from there: put the provider inside whatever context popovers need, in a box that fills the screen.
 
 ## Testing
 

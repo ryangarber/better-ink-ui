@@ -20,6 +20,10 @@ export interface ThemeColors {
   selectionBackground?: Color;
   /** A text area's placeholder, which is otherwise its text dimmed. */
   placeholder?: Color;
+  /** A popover's background. */
+  popover?: Color;
+  /** A popover's border, which is otherwise `border`. */
+  popoverBorder?: Color;
   [name: string]: Color | undefined;
 }
 

@@ -65,6 +65,14 @@ export {
   TextStyleContext
 } from "./layout/Text.tsx";
 export {
+  Popover,
+  type PopoverControls,
+  type PopoverProps,
+  PopoverProvider,
+  type PopoverState
+} from "./popover/Popover.tsx";
+export { type PopoverAlign, type PopoverPosition, placePopover } from "./popover/placement.ts";
+export {
   pageRows,
   revealRow,
   type ScrollAlign,
